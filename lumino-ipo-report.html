@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumino Industries IPO — RHP Analysis · 27 Aug 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-fill:#EAF3DE;--g-text:#27500A;--g-border:#C0DD97;--g-accent:#639922;
+  --a-fill:#FAEEDA;--a-text:#854F0B;--a-border:#FAC775;--a-accent:#EF9F27;
+  --r-fill:#FCEBEB;--r-text:#A32D2D;--r-border:#F7C1C1;--r-accent:#E24B4A;
+  --b-fill:#E6F1FB;--b-text:#185FA5;--b-border:#B5D4F4;--b-accent:#378ADD;
+  --n-fill:#F1EFE8;--n-text:#444441;--n-border:#D3D1C7;
+  --color-text-primary:#1f1e1a;--color-text-secondary:#6d6c65;
+  --color-background-primary:#ffffff;--color-background-secondary:#f5f4ef;
+  --color-border-primary:rgba(0,0,0,0.35);--color-border-secondary:rgba(0,0,0,0.15);--color-border-tertiary:rgba(0,0,0,0.10);
+  --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif
+}
+@media(prefers-color-scheme:dark){:root{
+  --g-fill:#173404;--g-text:#C0DD97;--g-border:#3B6D11;--g-accent:#97C459;
+  --a-fill:#412402;--a-text:#FAC775;--a-border:#854F0B;--a-accent:#EF9F27;
+  --r-fill:#501313;--r-text:#F09595;--r-border:#A32D2D;--r-accent:#E24B4A;
+  --b-fill:#042C53;--b-text:#85B7EB;--b-border:#185FA5;--b-accent:#378ADD;
+  --n-fill:#2C2C2A;--n-text:#D3D1C7;--n-border:#5F5E5A;
+  --color-text-primary:#eceae4;--color-text-secondary:#a3a19a;
+  --color-background-primary:#1f1e1b;--color-background-secondary:#2a2926;
+  --color-border-primary:rgba(255,255,255,0.4);--color-border-secondary:rgba(255,255,255,0.18);--color-border-tertiary:rgba(255,255,255,0.12)
+}}
+body{font-family:var(--font-sans);font-size:13px;line-height:1.6;color:var(--color-text-primary);background:var(--color-background-primary)}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 40px}
+.hdr{margin-bottom:14px}
+.hdr h1{font-size:20px;font-weight:600;line-height:1.3}
+.hdr .sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.conf{padding:10px 16px;border-radius:8px;margin-bottom:14px;font-size:12px}
+.conf.high,.conf.moderate{background:var(--g-fill);color:var(--g-text)}
+.conf.low{background:var(--a-fill);color:var(--a-text)}
+.conf.vlow{background:var(--r-fill);color:var(--r-text)}
+.tab-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tab-btn{padding:7px 18px;border-radius:100px;border:1px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);font-size:13px;font-weight:400;cursor:pointer;font-family:inherit;transition:border-color 0.15s,color 0.15s}
+.tab-btn:hover{border-color:var(--color-border-primary);color:var(--color-text-primary)}
+.tab-btn.active{border:1.5px solid var(--color-text-primary);color:var(--color-text-primary);font-weight:500}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:16px 20px;margin-bottom:12px}
+.card.green{background:var(--g-fill);border-color:var(--g-border)}
+.card.amber{background:var(--a-fill);border-color:var(--a-border)}
+.card.red{background:var(--r-fill);border-color:var(--r-border)}
+.card.blue{background:var(--b-fill);border-color:var(--b-border)}
+.card.grey{background:var(--n-fill);border-color:var(--n-border)}
+.ttl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);margin-bottom:10px}
+.view-label{font-size:18px;font-weight:500;margin-bottom:6px}
+.view-label.green{color:var(--g-text)}.view-label.amber{color:var(--a-text)}.view-label.red{color:var(--r-text)}
+.view-reason{font-size:13px;margin-bottom:16px;color:var(--color-text-primary)}
+.sec-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--color-text-secondary);margin:14px 0 8px}
+.bullet-row{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.bullet-row:last-child{border-bottom:none}
+.bicon{font-size:14px;min-width:18px;margin-top:1px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+th{text-align:left;padding:7px 10px;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.7px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+td{padding:9px 10px;color:var(--color-text-primary);border-bottom:0.5px solid var(--color-border-tertiary)}
+tr:last-child td{border-bottom:none}
+.pos{color:var(--g-accent);font-weight:500}.neg{color:var(--r-accent);font-weight:500}.neu{color:var(--color-text-secondary)}
+.badge{display:inline-block;padding:2px 9px;border-radius:100px;font-size:11px;font-weight:500}
+.badge.ok{background:var(--g-fill);color:var(--g-text)}
+.badge.warn{background:var(--a-fill);color:var(--a-text)}
+.badge.bad{background:var(--r-fill);color:var(--r-text)}
+.badge.info{background:var(--b-fill);color:var(--b-text)}
+.badge.neu{background:var(--n-fill);color:var(--n-text)}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:0.5px solid var(--color-border-tertiary);gap:16px}
+.info-row:last-child{border-bottom:none}
+.il{font-size:12px;color:var(--color-text-secondary)}
+.iv{font-size:12px;color:var(--color-text-primary);font-weight:500;text-align:right}
+.flag-card{border-left:3px solid var(--a-accent);background:var(--a-fill);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px}
+.flag-title{font-size:13px;font-weight:500;color:var(--a-text);margin-bottom:3px}
+.flag-note{font-size:12px;color:var(--a-text)}
+.score-box{background:var(--color-background-secondary);border-radius:8px;padding:14px 16px;margin-top:14px;font-size:12px;color:var(--color-text-secondary)}
+.band-box{display:flex;flex-wrap:wrap;gap:22px;align-items:center;background:var(--b-fill);border:1px solid var(--b-border);border-radius:12px;padding:14px 20px;margin-bottom:12px}
+.band-lab{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--b-text);opacity:0.85;margin-bottom:2px}
+.band-num{font-size:21px;font-weight:600;color:var(--b-text);line-height:1.2}
+.band-sub{font-size:11px;color:var(--b-text);opacity:0.85}
+.split{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:10px 0 6px;font-size:11px}
+.split div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:500;white-space:nowrap;padding:0 6px}
+.split .fresh{background:var(--g-accent)}
+.split .ofs{background:var(--a-accent)}
+.rf{display:flex;gap:12px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary);align-items:flex-start}
+.rf:last-child{border-bottom:none}
+.rf-sev{min-width:62px;font-size:10px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;padding-top:2px}
+.sev-high{color:var(--r-accent)}.sev-med{color:var(--a-accent)}.sev-low{color:var(--color-text-secondary)}.sev-clear{color:var(--g-accent)}
+.rf-t{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.rf-n{font-size:12px;color:var(--color-text-secondary)}
+.tl{border-left:2px solid var(--color-border-tertiary);margin-left:8px;padding-left:18px;margin-top:8px}
+.tl-item{position:relative;padding:8px 0}
+.tl-item:before{content:"";position:absolute;left:-23px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--a-accent)}
+.tl-d{font-size:11px;text-transform:uppercase;letter-spacing:0.7px;color:var(--color-text-secondary)}
+.tl-x{font-size:13px;color:var(--color-text-primary)}
+.gmp{background:var(--n-fill);border:1px dashed var(--n-border);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--n-text)}
+.src{color:var(--color-text-secondary);font-size:11px}
+.peer-you{background:var(--color-background-secondary)}
+.disc{font-size:11px;color:var(--color-text-secondary);border-top:0.5px solid var(--color-border-tertiary);padding-top:14px;margin-top:24px;line-height:1.6}
+details summary{font-size:12px;color:var(--color-text-secondary);cursor:pointer;padding:8px 0}
+details p{font-size:12px;color:var(--color-text-secondary);padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+details p:last-child{border-bottom:none}
+details strong{color:var(--color-text-primary);font-weight:500}
+@media(max-width:640px){.band-box{gap:14px}.band-num{font-size:18px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<div class="hdr">
+  <h1>Lumino Industries IPO — RHP Analysis</h1>
+  <div class="sub">Mainboard IPO · ₹78–82 band · Opens 27 Aug – Closes 31 Aug 2026 · Report compiled 27 Aug 2026 from the Red Herring Prospectus (dated 20 Aug 2026) + live public data · Educational screening tool, not investment advice</div>
+</div>
+
+<div class="conf high">
+  <strong>Data confidence: HIGH</strong><br>
+  RHP: Supplied — dated 20 Aug 2026 (535 pages, read in full) &nbsp;|&nbsp; Sections filled from named sources: 12 of 12 &nbsp;|&nbsp; Sources: RHP, SEBI filing, NSE/BSE anchor data via Chittorgarh, Screener.in, Value Research, Business Today, Motilal Oswal sector report. Two soft spots flagged inline: live category-wise subscription not yet published (Day 1 in progress) and one peer P/E (KEI) is dated Jan 2026.
+</div>
+
+<div class="tab-row">
+  <button class="tab-btn" onclick="show(0)">Snapshot</button>
+  <button class="tab-btn" onclick="show(1)">Business</button>
+  <button class="tab-btn" onclick="show(2)">Financials</button>
+  <button class="tab-btn" onclick="show(3)">Valuation</button>
+  <button class="tab-btn" onclick="show(4)">Offer</button>
+  <button class="tab-btn" onclick="show(5)">Peers</button>
+  <button class="tab-btn" onclick="show(6)">Red Flags</button>
+  <button class="tab-btn active" onclick="show(7)">View</button>
+</div>
+
+<!-- ═══ TAB 0: SNAPSHOT ═══ -->
+<div class="panel" id="p0">
+
+  <div class="band-box">
+    <div><div class="band-lab">Price band</div><div class="band-num">₹78 – ₹82</div><div class="band-sub">FV ₹5</div></div>
+    <div><div class="band-lab">Lot size</div><div class="band-num">182</div><div class="band-sub">₹14,924 at cap</div></div>
+    <div><div class="band-lab">Issue size</div><div class="band-num">₹700 Cr</div><div class="band-sub">Mainboard</div></div>
+    <div><div class="band-lab">Post-issue m-cap</div><div class="band-num">₹2,497 Cr</div><div class="band-sub">at cap price</div></div>
+  </div>
+
+  <div class="card">
+    <div class="info-row"><span class="il">Company</span><span class="iv">Lumino Industries Limited, Kolkata (business origins 1989; incorporated 2005)</span></div>
+    <div class="info-row"><span class="il">Sector · Industry</span><span class="iv">Capital Goods · Cables, Conductors &amp; Power T&amp;D EPC</span></div>
+    <div class="info-row"><span class="il">Issue type</span><span class="iv">Book-built · Profitability route (Reg 6(1) — RHP cover)</span></div>
+    <div class="info-row"><span class="il">Fresh issue vs OFS</span><span class="iv">₹500 Cr fresh (6.10 Cr sh) · ₹200 Cr OFS (2.44 Cr sh)</span></div>
+    <div class="info-row"><span class="il">Allocation</span><span class="iv">QIB ≤50% · NII ≥15% · Retail ≥35% · Employee ₹10 Cr</span></div>
+    <div class="info-row"><span class="il">Open · Close</span><span class="iv">27 Aug – 31 Aug 2026 (anchor bid 25 Aug)</span></div>
+    <div class="info-row"><span class="il">Allotment · Listing</span><span class="iv">1 Sep · 3 Sep 2026 on NSE (designated) &amp; BSE</span></div>
+    <div class="info-row"><span class="il">Lead managers</span><span class="iv" style="max-width:420px">Motilal Oswal Investment Advisors · JM Financial · Monarch Networth Capital</span></div>
+    <div class="info-row"><span class="il">Registrar</span><span class="iv">Bigshare Services Pvt. Ltd.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Subscription — as of ~1:00 PM IST, 27 Aug 2026 (Day 1 of 3)</div>
+    <table>
+      <thead><tr><th>Category</th><th>Times subscribed</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>QIB</td><td>🚩 Not yet published</td><td class="src">NSE/BSE feed pending</td></tr>
+        <tr><td>NII</td><td>🚩 Not yet published</td><td class="src">NSE/BSE feed pending</td></tr>
+        <tr><td>Retail</td><td>🚩 Not yet published</td><td class="src">NSE/BSE feed pending</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>Bidding opened 10 AM today; exchanges had not yet released category-wise figures at report time</strong></td><td class="src">Verify live at nseindia.com / bseindia.com</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:6px">Anchor tranche is done: ₹207 Cr from 30 institutions at ₹82 on 25 Aug (29.57% of the issue). Detail in the Offer tab.</div>
+  </div>
+
+  <div class="gmp">
+    <strong>Grey market premium: ₹44</strong> — reported 27 Aug 2026, ~11:30 AM IST, ipoji.com (recent range ₹12–48 across trackers).
+    GMP is an unofficial, unregulated, thinly traded and easily manipulated number. It reflects short-term sentiment, not the value of the business, and it forms no part of any assessment in this report.
+  </div>
+
+  <div class="flag-card">
+    <div class="flag-title">PROMOTER FAMILY RUNS A SECOND LISTED COMPANY IN THE SAME BUSINESS</div>
+    <div class="flag-note">Laser Power &amp; Infra Ltd — cables, conductors and power EPC, also Kolkata — is run by Deepak Goel, brother of Lumino's MD Devendra Goel and part of Lumino's promoter group. Lumino's Tamil Nadu &amp; Assam EPC and manufacturing divisions were demerged into Laser via an NCLT scheme (RHP p.127–130, p.289), and Devendra Goel personally guarantees ~₹1,650 Cr of Laser's working-capital facilities (RHP p.43–44). Full detail in the Red Flags tab.</div>
+  </div>
+  <div class="flag-card">
+    <div class="flag-title">PROFIT IS NOT TURNING INTO CASH</div>
+    <div class="flag-note">Across FY24–26, cumulative operating cash flow was ₹18.4 Cr against cumulative PAT of ₹371.2 Cr (0.05x). FY25 operating cash flow was <strong>negative ₹238.6 Cr</strong>. Receivable days have stretched from 119 to 160. RHP p.91, 94 (Restated Financials).</div>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 1: BUSINESS ═══ -->
+<div class="panel" id="p1">
+
+  <div class="card">
+    <div class="ttl">What does this company actually do?</div>
+    <div class="info-row"><span class="il">Business model</span><span class="iv" style="max-width:460px;text-align:right">Makes aluminium conductors, power cables and wires (incl. HTLS/ACCC via a CTC Global tie-up) and sells them to state discoms and EPC players; also executes power T&amp;D EPC projects (RDSS distribution works, EHV substations, reconductoring, railway electrification, solar, water), partly using its own products</span></div>
+    <div class="info-row"><span class="il">Revenue mix (FY26)</span><span class="iv" style="max-width:460px;text-align:right">Manufacturing ₹1,423.4 Cr (69.7%) · EPC ₹617.6 Cr (30.3%). Exports to USA, Nepal, Bangladesh, African utilities</span></div>
+    <div class="info-row"><span class="il">Revenue type</span><span class="iv">Tender/project-based with repeat discom orders — not recurring</span></div>
+    <div class="info-row"><span class="il">Top customer (FY26)</span><span class="iv">WBSEDCL — 7.32% of revenue (was 23.25% FY25, 29.45% FY24)</span></div>
+    <div class="info-row"><span class="il">Top 10 customers</span><span class="iv">46.52% (FY26) · 80.33% (FY25) · 90.78% (FY24)</span></div>
+    <div class="info-row"><span class="il">Government entities</span><span class="iv">53.12% of FY26 revenue (85.58% in FY24)</span></div>
+    <div class="info-row"><span class="il">Capacity utilisation</span><span class="iv">78.9% of 40,000 MT &nbsp;·&nbsp; Order book ₹3,149.88 Cr (1.54× FY26 revenue)</span></div>
+    <div class="info-row"><span class="il">Source</span><span class="iv src">RHP p.20, 29–31, 58, 158, 271–272 — Risk Factors, Our Business, MD&amp;A, KPI table</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Moat — claimed vs evidenced</div>
+    <table>
+      <thead><tr><th>Claimed strength</th><th>Evidence in the RHP</th><th>Holds up?</th></tr></thead>
+      <tbody>
+        <tr><td>Integrated "product-driven EPC" model</td><td class="src">23.08% of FY26 EPC project inputs made in-house; margins above pure-EPC peers (RHP p.55–58)</td><td><span class="badge ok">YES</span></td></tr>
+        <tr><td>Advanced-technology products (HTLS/ACCC)</td><td class="src">Collaboration with CTC Global (USA) for ACCC conductors; EHV substation revenue ₹0.05→₹91 Cr in FY26 (RHP p.256, MD&amp;A p.406)</td><td><span class="badge warn">PARTLY</span></td></tr>
+        <tr><td>Large, diversified order book</td><td class="src">₹3,149.88 Cr at Mar-26, up 62% in 2 years; EPC book ₹737.8→₹1,992 Cr. But RHP itself warns order book is unaudited and not indicative of future earnings (p.30)</td><td><span class="badge ok">YES</span></td></tr>
+        <tr><td>Long-standing discom relationships</td><td class="src">Repeat orders from WBSEDCL, Purvanchal VVNL, Assam PDCL, J&amp;K PDCL across all 3 years (p.29–31) — but tender-based, no exclusivity</td><td><span class="badge warn">PARTLY</span></td></tr>
+        <tr><td>Pricing power / brand</td><td class="src">Raw-material cost pass-through happens with a lag via tender price-variation clauses; FY26 manufacturing growth was price-led, not volume-led (production actually fell 4%, MD&amp;A p.406)</td><td><span class="badge bad">UNSUPPORTED</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Company-disclosed KPIs (audit-committee approved: YES, 20 Aug 2026)</div>
+    <table>
+      <thead><tr><th>KPI</th><th>FY24</th><th>FY25</th><th>FY26</th><th>Trend</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue from operations (₹ Cr)</td><td>1,407.3</td><td>1,918.0</td><td>2,041.1</td><td>📈</td></tr>
+        <tr><td>Operating EBITDA margin</td><td>10.31%</td><td>11.62%</td><td>11.71%</td><td>📈</td></tr>
+        <tr><td>RoE</td><td>21.52%</td><td>24.52%</td><td>24.62%</td><td>📈</td></tr>
+        <tr><td>RoCE</td><td>32.27%</td><td>31.89%</td><td>25.75%</td><td>📉</td></tr>
+        <tr><td>Total debt / equity</td><td>0.09</td><td>0.73</td><td>0.53</td><td>➡️</td></tr>
+        <tr><td>Closing order book (₹ Cr)</td><td>1,940.6</td><td>2,436.3</td><td>3,149.9</td><td>📈</td></tr>
+        <tr><td>Capacity (MT)</td><td>40,000</td><td>40,000</td><td>40,000</td><td>➡️</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">RHP p.158–159, Basis for Offer Price. RoCE fell because debt was layered on to fund working capital, not because operations weakened.</div>
+  </div>
+
+  <div class="score-box">
+    Business quality: <strong>MODERATE</strong> &nbsp;·&nbsp; Moat: <strong>NARROW</strong><br>
+    <span style="margin-top:4px;display:block">Integration and discom relationships give an edge over pure-EPC contractors, but this remains a tender-driven, working-capital-hungry business with no evidenced pricing power.</span>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 2: FINANCIALS ═══ -->
+<div class="panel" id="p2">
+
+  <div class="card">
+    <div class="ttl">Three-year restated track record (full years — no stub; FY26 ended Mar 2026)</div>
+    <table>
+      <thead><tr><th>₹ Cr</th><th>FY24</th><th>FY25</th><th>FY26</th><th>2Y CAGR</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue</td><td>1,407.3</td><td>1,918.0</td><td>2,041.1</td><td>20.4%</td></tr>
+        <tr><td>Operating EBITDA</td><td>145.1</td><td>222.9</td><td>238.9</td><td>28.3%</td></tr>
+        <tr><td>EBITDA margin</td><td>10.31%</td><td>11.62%</td><td>11.71%</td><td>—</td></tr>
+        <tr><td>PAT</td><td>86.6</td><td>124.6</td><td>160.0</td><td>35.9%</td></tr>
+        <tr><td>PAT margin</td><td>6.08%</td><td>6.40%</td><td>7.66%</td><td>—</td></tr>
+        <tr><td>EPS (₹, FV ₹5)</td><td>3.56</td><td>5.11</td><td>6.57</td><td>35.9%</td></tr>
+        <tr><td>Cash flow from ops</td><td class="pos">+100.9</td><td class="neg">−238.6</td><td class="pos">+156.1</td><td>—</td></tr>
+        <tr><td>CFO ÷ PAT</td><td>1.17x</td><td class="neg">−1.92x</td><td>0.98x</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">RHP p.91–94, Restated Consolidated Financial Information. FY26's positive CFO leaned on trade payables (+₹154.7 Cr) and acceptances (+₹151.3 Cr) — i.e. stretching supplier credit — while receivables kept absorbing ₹171.5 Cr.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Balance sheet and quality checks</div>
+    <table>
+      <thead><tr><th>Metric</th><th>Latest (FY26)</th><th>3Y trend</th><th>Signal</th><th>Plain English</th></tr></thead>
+      <tbody>
+        <tr><td>Debt / Equity</td><td>0.53</td><td>↑ (0.09→0.53)</td><td><span class="badge ok">SAFE</span></td><td class="src">Below 1 = safe; but note next row</td></tr>
+        <tr><td>Trade acceptances (off the debt line)</td><td>₹595.5 Cr</td><td>↑</td><td><span class="badge warn">WATCH</span></td><td class="src">Supplier-financing that behaves like debt</td></tr>
+        <tr><td>Interest coverage</td><td>4.10x</td><td>→</td><td><span class="badge ok">HEALTHY</span></td><td class="src">Above 3x = healthy</td></tr>
+        <tr><td>Current ratio</td><td>1.40</td><td>↓ (1.55→1.40)</td><td><span class="badge warn">WATCH</span></td><td class="src">Above 1.5 = comfortable</td></tr>
+        <tr><td>CFO ÷ PAT (3Y aggregate)</td><td>0.05x</td><td>volatile</td><td><span class="badge bad">CONCERN</span></td><td class="src">Below 0.5 = concern; ₹18 Cr cash from ₹371 Cr profit</td></tr>
+        <tr><td>Receivable days</td><td>160</td><td>↑ (119→137→160)</td><td><span class="badge bad">FLAG</span></td><td class="src">Receivables +95% in 2 yrs vs revenue +45%</td></tr>
+        <tr><td>Cash conversion cycle</td><td>~73 days</td><td>↑ (from ~26, FY24; revenue basis)</td><td><span class="badge warn">FLAG</span></td><td class="src">Working capital intensity rising</td></tr>
+        <tr><td>RoE</td><td>24.62%</td><td>↑</td><td><span class="badge ok">GOOD</span></td><td class="src">Above 15% = good; best in RHP peer set</td></tr>
+        <tr><td>RoCE</td><td>25.75%</td><td>↓ (from 32.3%)</td><td><span class="badge ok">GOOD</span></td><td class="src">Still above 15%, but sliding on WC debt</td></tr>
+        <tr><td>Contingent liabilities</td><td>₹24.86 Cr</td><td>3.4% of net worth</td><td><span class="badge ok">OK</span></td><td class="src">Above 25% of net worth = flag; well below</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:6px">RHP p.91, 94, 96, 158–159. Auditors: joint (Singhi &amp; Co. + SDP &amp; Associates) — unmodified opinion, no CARO adverse remarks, no emphasis of matter on the restated numbers (p.324, 415).</div>
+  </div>
+
+  <div class="card green">
+    <div class="ttl">Pre-IPO earnings check — mandatory</div>
+    <div style="font-size:13px"><strong>NO SPIKE OBSERVED — but FY26 profit quality was investigated</strong></div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">EBITDA margin moved gradually (10.31% → 11.62% → 11.71%) with no filing-year jump. However, FY26 PAT grew 28.4% on revenue growth of only 6.4%. The gap came from: other income of ₹48.2 Cr (up from ₹28.7 Cr — 23.6% of pre-tax profit), a lower effective tax rate of 21.9% vs 26.2% (including a ₹4.5 Cr prior-year tax reversal and deferred-tax credits), and FY25's ₹6.4 Cr doubtful-debt provision not repeating. Core operating EBITDA grew just 7.2%. Management attributes the modest revenue growth to lower T&amp;D project execution, offset by EHV substation ramp-up. RHP p.92, 158, 406–407 (MD&amp;A). One-off-assisted, not manufactured — but the operating year was ordinary.</div>
+  </div>
+
+  <div class="card grey">
+    <div class="ttl">Scenario arithmetic — skipped for this report</div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">The stated intent behind this report is listing-day only. Multi-year scenario extension of historical CAGRs measures nothing relevant to a day-one outcome, and for IPOs the short public track record makes it unusually unreliable anyway — so it is deliberately omitted rather than decorated with numbers.</div>
+  </div>
+
+  <div class="score-box">
+    Financial quality: <strong>ADEQUATE</strong><br>
+    <span style="margin-top:4px;display:block">Genuine growth and top-tier return ratios, undermined by a working-capital cycle that has consumed nearly every rupee of three years' reported profit.</span>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 3: VALUATION ═══ -->
+<div class="panel" id="p3">
+
+  <div class="card">
+    <div class="ttl">What you are being asked to pay</div>
+    <table>
+      <thead><tr><th>Metric</th><th>At floor ₹78</th><th>At cap ₹82</th><th>Peer median</th><th>Signal</th></tr></thead>
+      <tbody>
+        <tr><td>P/E — FY26 EPS ₹6.57, pre-issue</td><td>11.9x</td><td>12.5x</td><td rowspan="2">~33x (current)</td><td><span class="badge ok">CHEAP</span></td></tr>
+        <tr><td>P/E — FY26 EPS post-issue (₹5.20 / ₹5.25)</td><td>15.0x</td><td>15.6x</td><td><span class="badge ok">CHEAP</span></td></tr>
+        <tr><td>P/B — post-issue net worth ₹1,229.7 Cr</td><td>1.95x</td><td>2.03x</td><td>~3.3x</td><td><span class="badge ok">CHEAP</span></td></tr>
+        <tr><td>EV/EBITDA — FY26, net debt ₹113.2 Cr</td><td>10.5x</td><td>10.9x</td><td>🚩 not reliably compiled</td><td><span class="badge neu">FAIR</span></td></tr>
+        <tr><td>M-cap / Sales — FY26</td><td>1.18x</td><td>1.22x</td><td>~2.0x</td><td><span class="badge ok">CHEAP</span></td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">Post-issue shares: 30.46 Cr at cap / 30.77 Cr at floor. M-cap ₹2,497 Cr / ₹2,400 Cr. Peer medians use CURRENT traded multiples (Screener.in / Value Research / broker data, Jun–Aug 2026), not the RHP's table — see Peers tab for per-peer dates. Netting the ₹500 Cr fresh cash against EV would drop EV/EBITDA to ~8.8x at cap.</div>
+  </div>
+
+  <div class="card amber">
+    <div class="ttl">What insiders paid — weighted average cost of acquisition</div>
+    <table>
+      <thead><tr><th>Period / holder</th><th>WACA per share</th><th>vs cap price ₹82</th></tr></thead>
+      <tbody>
+        <tr><td>All transactions, last 1 year</td><td>None occurred</td><td>N.A.</td></tr>
+        <tr><td>All transactions, last 18 months</td><td>None occurred (only Nov-2024 3:1 bonus + ₹10→₹5 split, both &gt;18m ago)</td><td>N.A.</td></tr>
+        <tr><td>Devendra Goel (selling ₹150 Cr)</td><td>₹0.002</td><td>~41,000x his WACA</td></tr>
+        <tr><td>Jay Goel (selling ₹50 Cr)</td><td>Nil</td><td>Infinite multiple</td></tr>
+        <tr><td>Pre-IPO placement</td><td>None done</td><td>N.A.</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;margin-top:8px">The astronomical gap reflects 35+ years of founder ownership plus bonus capitalisation — not recent cheap insider entries; there were no primary or secondary transactions at all in the last three years apart from the bonus, split and family-trust transfers. Even so, the two selling promoters realise ₹200 Cr at essentially zero cost basis, while a public buyer pays ₹82. RHP cover page &amp; p.135–136, 168–169, Capital Structure / Basis for Offer Price.</div>
+  </div>
+
+  <div class="score-box">
+    Pricing: <strong>LEAVES ROOM ON THE TABLE</strong> (relative to current peer multiples)<br>
+    <span style="margin-top:4px;display:block">The issuer asks ~15.6x last-year earnings for a 20%-CAGR, 24.6%-RoE cables-plus-EPC franchise; for that price to be justified on fundamentals, the growth must continue AND start converting into cash — the discount to peers exists partly because it hasn't yet.</span>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 4: OFFER ═══ -->
+<div class="panel" id="p4">
+
+  <div class="card">
+    <div class="ttl">Where the money goes</div>
+    <div class="split">
+      <div class="fresh" style="width:71.4%">Fresh ₹500 Cr · 71.4%</div>
+      <div class="ofs" style="width:28.6%">OFS ₹200 Cr · 28.6%</div>
+    </div>
+    <div class="src">Fresh issue money enters the company. OFS money goes to the two selling promoters.</div>
+    <table style="margin-top:12px">
+      <thead><tr><th>Object of the fresh issue</th><th>Amount</th><th>% of gross</th><th>Quality</th></tr></thead>
+      <tbody>
+        <tr><td>Prepayment/repayment of borrowings (7 named bank facilities: IDFC First, HDFC, Union Bank, BoB, Yes Bank, SBI — ₹342.4 Cr outstanding as of 31 Jul 2026; all working-capital/vendor-finance; none from promoter entities)</td><td>₹337.00 Cr</td><td>67.4%</td><td><span class="badge ok">SPECIFIC</span></td></tr>
+        <tr><td>Capex — Unit I: equipment, machinery, civil works (adds 10,980 MT, taking capacity to 41,980 MT)</td><td>₹15.01 Cr</td><td>3.0%</td><td><span class="badge ok">SPECIFIC</span></td></tr>
+        <tr><td>General corporate purposes (balance after offer expenses; hard-capped at 25% of gross)</td><td>≈ up to ₹125 Cr</td><td>≤25%</td><td><span class="badge warn">BROAD</span></td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">RHP p.144–149, Objects of the Offer · Monitoring agency: Crisil Ratings Ltd (agreement dated 20 Aug 2026, p.102). Note: repaying short-tenor vendor-finance with equity permanently releases working capital — sensible for this balance sheet, but it is debt substitution, not growth capex.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Who is selling, and what it cost them</div>
+    <table>
+      <thead><tr><th>Selling shareholder</th><th>Type</th><th>Amount offered</th><th>% of their holding</th><th>Their WACA</th></tr></thead>
+      <tbody>
+        <tr><td>Devendra Goel (MD)</td><td>Promoter</td><td>₹150 Cr (~1.83 Cr sh at cap)</td><td>~15.3% of 11.94 Cr sh</td><td>₹0.002</td></tr>
+        <tr><td>Jay Goel (Whole-time Director)</td><td>Promoter</td><td>₹50 Cr (~0.61 Cr sh at cap)</td><td>~7.0% of 8.66 Cr sh</td><td>Nil</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:6px">RHP cover, p.144. Promoters selling, but only a modest slice of their holdings; no financial investors exist to exit.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Shareholding and dilution</div>
+    <table>
+      <thead><tr><th>Holder</th><th>Pre-issue %</th><th>Post-issue %</th><th>Change</th></tr></thead>
+      <tbody>
+        <tr><td>Promoters (3)</td><td>84.90%</td><td>~59.89%</td><td class="neg">−25.0 pp</td></tr>
+        <tr><td>Promoter group (Rashmi Goel, trusts, etc.)</td><td>15.10%</td><td>~12.08%</td><td class="neg">−3.0 pp</td></tr>
+        <tr><td>PE / VC investors</td><td>0%</td><td>0%</td><td class="neu">— pp</td></tr>
+        <tr><td>ESOP pool</td><td>0%</td><td>0%</td><td class="neu">— pp</td></tr>
+        <tr><td>Public</td><td>0%</td><td>28.03%</td><td class="pos">+28.0 pp</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:6px">RHP p.139–140. Pre-IPO the company is 100% family-held — so the entire post-listing free float is the IPO itself. Day-one tradable float ≈ 6.01 Cr shares (~₹493 Cr at cap, ~19.7% of m-cap) once anchor lock-ins are netted out.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Lock-in expiry — when shares can start hitting the market</div>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-d">~1 Oct 2026 · 30 days after allotment</div>
+        <div class="tl-x">50% of anchor allotment — 1.26 Cr shares, ~4.1% of post-issue equity</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-d">~30 Nov 2026 · 90 days after allotment</div>
+        <div class="tl-x">Remaining 50% of anchor allotment — 1.26 Cr shares, ~4.1%</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-d">~1 Mar 2027 · 6 months after allotment</div>
+        <div class="tl-x">Promoter + promoter-group holding above minimum contribution — ~51.9% of post-issue equity becomes transferable (the big cliff)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-d">~1 Mar 2028 · 18 months after allotment</div>
+        <div class="tl-x">Minimum promoter contribution — 20% of post-issue equity</div>
+      </div>
+    </div>
+    <div class="src" style="margin-top:10px">RHP p.135–137, Capital Structure. 18-month/6-month periods verified against current SEBI ICDR norms (18 months applies because the majority of fresh proceeds fund debt repayment, not capex). Lock-in rules do change — re-verify near the dates.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Anchor book — ₹207 Cr, 30 allottees at ₹82 (25 Aug 2026)</div>
+    <table>
+      <thead><tr><th>Anchor investor</th><th>Amount</th><th>% of anchor book</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>HDFC MF (6 schemes incl. Infrastructure, Large &amp; Mid Cap)</td><td>₹44.9 Cr</td><td>21.7%</td><td>Domestic MF</td></tr>
+        <tr><td>Kotak Mahindra MF (5 schemes)</td><td>₹45.0 Cr</td><td>21.7%</td><td>Domestic MF</td></tr>
+        <tr><td>Motilal Oswal MF (4 schemes)</td><td>₹19.9 Cr</td><td>9.6%</td><td>Domestic MF (BRLM affiliate)</td></tr>
+        <tr><td>Bandhan MF (2 schemes)</td><td>₹19.9 Cr</td><td>9.6%</td><td>Domestic MF</td></tr>
+        <tr><td>Abakkus Growth Fund</td><td>₹14.9 Cr</td><td>7.2%</td><td>Long-only AIF</td></tr>
+        <tr><td>Kotak Life + Bajaj Life + SBI General Insurance</td><td>₹19.9 Cr</td><td>9.6%</td><td>Insurance</td></tr>
+        <tr><td>3P India Equity Fund · Edelweiss MF · BoI MF · JM MF (BRLM affiliate)</td><td>₹27.4 Cr</td><td>13.3%</td><td>MF / long-only</td></tr>
+        <tr><td>Citigroup Global Markets Mauritius · Ashika Global · Silver Stride</td><td>₹15.0 Cr</td><td>7.2%</td><td>FPI / prop / other</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">Long-horizon institutions (domestic MFs + insurers + long-only AIFs): ~93% of the anchor book — a genuinely strong mix, with the neutral note that ~12% sits with funds affiliated to two of the three lead managers. Source: NSE/BSE anchor allocation via Chittorgarh, 25–26 Aug 2026.</div>
+  </div>
+
+  <div class="score-box">
+    Offer structure: <strong>BALANCED</strong><br>
+    <span style="margin-top:4px;display:block">Built primarily to deleverage the company (71% fresh, named lenders, Crisil-monitored), with a ₹200 Cr promoter cash-out at nil cost basis riding alongside — a new buyer funds the balance-sheet repair and partly the family's harvest.</span>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 5: PEERS ═══ -->
+<div class="panel" id="p5">
+
+  <div class="card">
+    <div class="ttl">Against listed comparables — Lumino at cap ₹82; peers at current traded multiples</div>
+    <table>
+      <thead><tr><th>Company</th><th>P/E</th><th>P/B</th><th>RoE</th><th>Rev growth (FY26)</th><th>EBITDA margin</th><th>D/E</th></tr></thead>
+      <tbody>
+        <tr class="peer-you"><td><strong>Lumino Industries ◀ this IPO</strong></td><td>15.6</td><td>2.03</td><td>24.6%</td><td>6.4%</td><td>11.7%</td><td>0.53</td></tr>
+        <tr><td>Apar Industries</td><td>~75 <span class="src">(mid-Aug)</span></td><td>—</td><td>19.8%</td><td>23.3%</td><td>8.2%</td><td>0.16</td></tr>
+        <tr><td>KEC International</td><td>~20.6 <span class="src">(mid-Aug)</span></td><td>2.34</td><td>11.1%</td><td>7.6%</td><td>7.1%</td><td>0.87</td></tr>
+        <tr><td>KEI Industries</td><td>~50 <span class="src">🚩 Jan '26 — dated, verify</span></td><td>6.75</td><td>14.8%</td><td>20.7%</td><td>10.5%</td><td>0.03</td></tr>
+        <tr><td>Kalpataru Projects Intl</td><td>20.5 <span class="src">(11 Aug)</span></td><td>2.99</td><td>15.8%</td><td>21.6%</td><td>8.3%</td><td>0.44</td></tr>
+        <tr><td>Techno Electric &amp; Engg</td><td>~27 <span class="src">(mid-Aug)</span></td><td>—</td><td>12.0%</td><td>43.3%</td><td>14.2%</td><td>0.02</td></tr>
+        <tr><td>Laser Power &amp; Infra</td><td>~40–42 <span class="src">(31 Jul)</span></td><td>3.68</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">Lumino multiples: post-issue at cap. Peer P/Es: Screener.in, Value Research, India Infoline, broker data (Jun–Aug 2026, dated per cell). RoE / growth / margin / D/E for peers: FY26 figures from the RHP's own KPI comparison (p.161–162). Peers named by the RHP: Apar, Bajel, JSK (unlisted), Kalpataru, KEC, KEI, Sterlite Electric, Universal Cables, Techno Electric. Added by this analysis: <strong>Laser Power &amp; Infra</strong> — the RHP omits it, and the omission is material: it is the closest comparable by geography, product mix, size AND it is the promoter family's own sibling company. Bajel (P/E not meaningful — ₹2,383 Cr m-cap on ₹6.9 Cr FY26 PAT) and Universal Cables (current multiple 🚩 DATA UNAVAILABLE — verify on screener.in) excluded from the median. Peer P/E median used in Valuation tab: ~33x.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Sector context — 5 to 10 year view</div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--g-accent)">↑</span><span>National Electricity Plan pegs ~₹9.15 lakh Cr of transmission investment by 2032 to evacuate 500 GW non-fossil capacity by 2030 (900 GW installed by FY32) — a decade-long demand base for conductors, cables and T&amp;D EPC (Power Line / Macquarie via Tribune, Jul 2026).</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--g-accent)">↑</span><span>RDSS — the ₹3.04 lakh Cr distribution-revamp scheme — directly funds exactly the discom loss-reduction and reconductoring work Lumino executes; ₹2.62 lakh Cr of projects already sanctioned.</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--r-accent)">↓</span><span>Sector ordering slowed in FY26 (16 transmission schemes awarded vs 45 in FY25); brokerages call it temporary bandwidth constraint, not structural — but Lumino's own FY26 T&amp;D EPC revenue fell 27%, showing the sensitivity (Motilal Oswal sector report, Apr 2026; RHP MD&amp;A p.406).</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--r-accent)">↓</span><span>Discom financial health is the sector's chronic disease: government buyers pay slowly, which is visible in Lumino's own 160 receivable days — growth here is always part-financed by the contractor.</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--a-accent)">§</span><span>Regulatory reset in motion: Electricity (Amendment) Bill 2026, Draft National Electricity Policy 2026, and the RDSS window (2021–26) rolling over — scheme-transition timing can create air-pockets in tender flow.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">News that matters beyond listing day</div>
+    <div style="padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px">Anchor book of ₹207 Cr led by HDFC MF, Kotak MF, Abakkus, insurers</div><div class="src">Serious domestic long-only money underwrote the price a day before opening — a quality signal independent of grey-market noise</div></div>
+        <div class="src" style="white-space:nowrap">26 Aug · Business Today</div>
+      </div>
+    </div>
+    <div style="padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px">Sibling company Laser Power &amp; Infra listed earlier and trades at ~40x P/E</div><div class="src">The family's twin business re-rated sharply post-listing (its Q1 FY27 revenue fell 22%, though) — read-across cuts both ways: valuation comfort for Lumino, execution caution for the space</div></div>
+        <div class="src" style="white-space:nowrap">Jul–Aug 2026 · Screener / Groww</div>
+      </div>
+    </div>
+    <div style="padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px">Lumino ceded voting control of its 50 MW solar SPV (RJ Green) on 7 Aug 2026</div><div class="src">Buyer holds 86% of voting rights via DVR shares while Lumino keeps 51% equity — signals a pullback from owning renewable assets to stay an EPC/products player</div></div>
+        <div class="src" style="white-space:nowrap">RHP p.415 · Material Developments</div>
+      </div>
+    </div>
+    <div style="padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px">T&amp;D capex supercycle intact; FY26 ordering dip called temporary</div><div class="src">₹9 lakh Cr pipeline to 2032 with HVDC and reconductoring emphasis — the structural driver of Lumino's ₹3,150 Cr order book</div></div>
+        <div class="src" style="white-space:nowrap">Apr 2026 · Motilal Oswal report</div>
+      </div>
+    </div>
+    <div style="padding:10px 0">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px">CTC Global (USA) collaboration for ACCC conductors</div><div class="src">Access to premium HTLS reconductoring technology — the same tie-up Apar pioneered — matters as ageing-grid upgrades become the largest tender category</div></div>
+        <div class="src" style="white-space:nowrap">RHP p.256 · Groww</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="score-box">
+    Peer standing: <strong>MID-PACK</strong> (smallest by scale, best-in-set RoE)<br>
+    <span style="margin-top:4px;display:block">It ranks top of its RHP peer table on RoE and above most EPC peers on margin, yet is a fraction of their size — and the asking multiple of 15.6x sits below every single peer's current multiple, which is consistent with (arguably more conservative than) that rank.</span>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 6: RED FLAGS ═══ -->
+<div class="panel" id="p6">
+
+  <div class="card">
+    <div class="ttl">Full red flag scan — 18 checks run</div>
+    <div class="rf"><div class="rf-sev sev-high">HIGH</div><div><div class="rf-t">Group entity in the same business</div><div class="rf-n">Laser Power &amp; Infra Ltd (listed; ~₹4,200 Cr m-cap) makes cables/conductors and does power EPC from Kolkata — run by Deepak Goel, brother of MD Devendra Goel and a member of Lumino's promoter group. Lumino's TN &amp; Assam divisions were demerged into it via NCLT scheme (RHP p.127–130, 289). Devendra Goel personally guarantees ~₹1,650 Cr of Laser's working-capital lines across 14 banks (p.43–44); reciprocally, Deepak Goel and two family firms guarantee Lumino's facilities. RHP p.316 states promoters are "not involved in any other venture in the same line" — technically true of the three named promoters as directors/shareholders, but the guarantee web and shared history make the two companies financially and competitively entangled. RHP p.445 separately confirms common pursuits exist between group companies and Lumino.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-high">HIGH</div><div><div class="rf-t">CFO persistently below PAT</div><div class="rf-n">3-year aggregate CFO ₹18.4 Cr vs PAT ₹371.2 Cr (0.05x); FY25 CFO was −₹238.6 Cr, plugged by a ₹377 Cr borrowing jump. FY26's recovery to ₹156 Cr leaned on stretching payables/acceptances by ₹306 Cr. RHP p.94.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-high">HIGH</div><div><div class="rf-t">Receivables growing materially faster than revenue</div><div class="rf-n">₹459.5 Cr → ₹894.9 Cr over two years (+95%) vs revenue +45%; receivable days 119 → 160. Another ₹318 Cr sits in "other financial assets" (largely unbilled/retention typical of EPC). The counterparties are state discoms. RHP p.91.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-med">MEDIUM</div><div><div class="rf-t">Related-party purchases at scale</div><div class="rf-n">Total RPTs: 15.3% (FY24), 14.6% (FY25), 9.2% (FY26) of revenue — above the 10% flag line in two of three years. Dominated by aluminium purchases from P.S. Enterprise, a promoter-group MSME structured to access NSIC benefits unavailable to Lumino itself; related parties supplied 19.5% / 22.1% / 12.8% of raw materials. Declining, disclosed, stated arm's-length — but a permanent conflict channel. RHP p.39–40, 45–46, 97–99.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-med">MEDIUM</div><div><div class="rf-t">WACA far below cap price / promoter cash-out</div><div class="rf-n">Selling promoters' WACA is ₹0.002 and Nil against ₹82 asked — the product of 35+ years and a 3:1 bonus, not recent cheap entries (no primary/secondary deals in 3 years). They harvest ₹200 Cr; ₹500 Cr enters the company. RHP cover, p.135–136.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-med">MEDIUM</div><div><div class="rf-t">Working capital cycle lengthening</div><div class="rf-n">Cash conversion cycle roughly ~26 → ~73 days (FY24→FY26, revenue basis), funded by ₹595 Cr of trade acceptances plus bank debt; current ratio slipped 1.55 → 1.40. RHP p.91.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-med">MEDIUM</div><div><div class="rf-t">Large general-corporate-purposes allocation</div><div class="rf-n">Up to ~₹125 Cr (the 25% ceiling) of the fresh issue is unallocated GCP — the objects table leaves the GCP line to be finalised at Prospectus stage. RHP p.144–145.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-med">MEDIUM</div><div><div class="rf-t">Lock-in expiry concentration</div><div class="rf-n">~52% of post-issue equity (promoter/PG above minimum contribution) unlocks in one cliff around 1 Mar 2027; anchor tranches free up 1 Oct and 30 Nov 2026. RHP p.135–137.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-med">MEDIUM</div><div><div class="rf-t">Geographic / customer-type dependency</div><div class="rf-n">Both plants are in the Kolkata region (single-state manufacturing base); 53.1% of FY26 revenue from government entities; top supplier Hindalco alone is 30.9% of raw-material cost. RHP p.20, 39, 271.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-low">LOW</div><div><div class="rf-t">Regulatory notice history</div><div class="rf-n">RoC (WB) notice of Jun 2023 following a complaint alleging non-compliance/corrupt practices in a Punjab 220kV HTLS tender; company filed a detailed denial in Jul 2023 and nothing further has come — disclosed, dormant, but on record. Separately, a customs-duty appeal of ₹9.47 Cr is pending at Calcutta HC. RHP p.428.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-low">LOW</div><div><div class="rf-t">Auditor history</div><div class="rf-n">No qualification, no adverse CARO, no emphasis of matter on restated financials (p.415). However, legacy auditor SDP &amp; Associates lacked an ICAI peer-review certificate for FY24, forcing Singhi &amp; Co. (appointed joint auditor Jun 2024) to re-audit FY24 special-purpose statements — a small-firm-legacy artefact, cleanly remediated. RHP p.107, 324.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-low">LOW</div><div><div class="rf-t">Criminal matters touching directors</div><div class="rf-n">Promoters: nil criminal, nil regulatory, nil SEBI action (p.431). One independent director (Shalu Bhandari) is named in UP pollution-board complaints purely in her capacity as an independent director of unrelated Bajaj Hindusthan Sugar, plus personal matrimonial litigation — nothing touching Lumino's operations (p.434–435). The company itself is the complainant in 10+ criminal cases against subcontractors for material theft.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-clear">CLEAR</div><div><div class="rf-t">OFS-dominated issue</div><div class="rf-n">Checked — OFS is 28.6%; fresh money dominates at 71.4%.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-clear">CLEAR</div><div><div class="rf-t">Pre-IPO margin spike</div><div class="rf-n">Checked — margins moved gradually; FY26 PAT quality investigated in the Financials tab (other-income and tax assist, no manufactured spike).</div></div></div>
+    <div class="rf"><div class="rf-sev sev-clear">CLEAR</div><div><div class="rf-t">Contingent liabilities vs net worth</div><div class="rf-n">Checked — ₹24.86 Cr = 3.4% of net worth, far below the 25% flag line (p.96).</div></div></div>
+    <div class="rf"><div class="rf-sev sev-clear">CLEAR</div><div><div class="rf-t">Insider issuances below offer price in last 12 months</div><div class="rf-n">Checked — none; the Nov-2024 bonus/split fall outside the window and no other allotments occurred (p.135, 168).</div></div></div>
+    <div class="rf"><div class="rf-sev sev-clear">CLEAR</div><div><div class="rf-t">Proceeds repaying promoter-linked debt</div><div class="rf-n">Checked — all 7 facilities being repaid are from banks (IDFC First, HDFC, Union, BoB, Yes, SBI); none raised from or on behalf of promoter entities (p.147–148). A historical ₹5.6 Cr Lumino Finvest loan was repaid back in FY24 from own funds.</div></div></div>
+    <div class="rf"><div class="rf-sev sev-clear">CLEAR</div><div><div class="rf-t">QIB-route filing</div><div class="rf-n">Checked — filed under Regulation 6(1), the profitability route, with standard 50/15/35 allocation. The company met the eligibility test (cover page, p.88, 447).</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Litigation and regulatory</div>
+    <table>
+      <thead><tr><th>Against</th><th>Nature</th><th>Number of matters</th><th>Amount involved</th></tr></thead>
+      <tbody>
+        <tr><td>Promoters</td><td>Criminal: Nil · Regulatory: Nil · Direct tax</td><td>4 (tax)</td><td>₹0.57 Cr</td></tr>
+        <tr><td>Directors</td><td>Criminal: 1 (unrelated-company capacity) · Direct tax</td><td>1 + 4</td><td>₹0.57 Cr</td></tr>
+        <tr><td>The company</td><td>Regulatory (RoC notice, dormant) · Customs/GST/arbitration</td><td>1 + 5 tax + 3 civil</td><td>₹23.58 Cr tax + ₹9.47 Cr customs</td></tr>
+        <tr><td>Subsidiaries</td><td>—</td><td>Nil</td><td>Nil</td></tr>
+        <tr><td><strong>Total quantified exposure</strong></td><td>—</td><td>—</td><td><strong>~₹34 Cr · ~4.6% of net worth</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="src" style="margin-top:8px">RHP p.427–437, Outstanding Litigation. No criminal proceeding is pending against any promoter; the single director-linked criminal matter (UPPCB pollution complaints) concerns her independent-director role at Bajaj Hindusthan Sugar, an unconnected company, and is described by name and nature above.</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Governance</div>
+    <div class="info-row"><span class="il">Related-party transactions (FY26)</span><span class="iv">₹187.8 Cr · 9.2% of revenue &nbsp; <span class="badge warn">FLAG (was &gt;10% in FY24–25)</span></span></div>
+    <div class="info-row"><span class="il">Royalty or brand fee to promoter entities</span><span class="iv">None · Rent ₹0.99 Cr/yr to Devendra Goel</span></div>
+    <div class="info-row"><span class="il">Group entity in the same business</span><span class="iv">Laser Power &amp; Infra (family) · plus P.S. Enterprise in the supply chain</span></div>
+    <div class="info-row"><span class="il">Board</span><span class="iv">6 directors · 3 independent (50%, incl. 1 woman) · SEBI-compliant</span></div>
+    <div class="info-row"><span class="il">Auditors</span><span class="iv">Singhi &amp; Co. (joint, since Jun 2024) + SDP &amp; Associates · change was an addition, not a resignation</span></div>
+    <div class="info-row"><span class="il">Audit opinion</span><span class="iv">Unmodified · CARO: no adverse remarks · No emphasis of matter</span></div>
+    <div class="info-row"><span class="il">Promoter's prior listed venture</span><span class="iv">None by the 3 named promoters; family (brother) runs listed Laser Power &amp; Infra</span></div>
+    <div class="info-row"><span class="il">Promoter remuneration vs PAT (FY26)</span><span class="iv">₹6.3 Cr ≈ 3.9% of PAT — reasonable</span></div>
+    <div class="info-row"><span class="il">Dividends (last 3 fiscals)</span><span class="iv">None declared (p.321)</span></div>
+    <div class="info-row"><span class="il">KMP attrition, last 2 years</span><span class="iv">Additions dominated (CFO Hemant Bhuwania, CS Vivek Jain joined); 1 exit noted (Amit Bajaj off payroll in FY26)</span></div>
+  </div>
+
+  <div class="score-box">
+    Red flag verdict: <strong>SOME CONCERNS</strong> &nbsp;·&nbsp; Governance: <strong>ACCEPTABLE</strong><br>
+    <span style="margin-top:4px;display:block">The single most material item found is the financial and competitive entanglement with the promoter family's other listed cables company, Laser Power &amp; Infra — including personal guarantees of ~₹1,650 Cr of its debt by Lumino's own Managing Director.</span>
+  </div>
+
+</div>
+
+<!-- ═══ TAB 7: VIEW (default active) ═══ -->
+<div class="panel on" id="p7">
+
+  <div class="card amber">
+    <div class="view-label amber">MODERATE FUNDAMENTALS</div>
+    <div class="view-reason">The offer document shows a fast-growing, high-RoE Kolkata cables-and-power-EPC family business, offered at ~15.6x last-year earnings — a visible discount to every listed peer — but one whose reported profits have largely not yet converted into cash, and whose family web (a sibling listed competitor, a promoter-group supplier, cross personal guarantees) a buyer must be willing to live with.</div>
+
+    <div class="sec-label">What the document supports</div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--g-accent)">✓</span><span>Revenue CAGR of 20.4% and PAT CAGR of 35.9% (FY24–26) with RoE of 24.6% — the highest in the RHP's own peer table (RHP p.158, 161).</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--g-accent)">✓</span><span>Order book of ₹3,149.88 Cr = 1.54× FY26 revenue, with the EPC book up ~170% in two years — revenue visibility exists on paper (RHP p.158).</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--g-accent)">✓</span><span>Priced at 15.6x post-issue FY26 earnings against a ~33x current peer median, with 71% of the issue as fresh, Crisil-monitored money repaying ₹337 Cr of named bank debt (RHP p.144–148; peer data Jun–Aug 2026).</span></div>
+
+    <div class="sec-label">What to weigh against it</div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--a-accent)">⚠</span><span>Three years of profit produced almost no cash — cumulative CFO of ₹18.4 Cr against PAT of ₹371.2 Cr, including FY25 CFO of −₹238.6 Cr (RHP p.94).</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--a-accent)">⚠</span><span>Receivables at 160 days and climbing, on 53% government-entity revenue — growth here is contractor-financed, and the ₹500 Cr fresh money partly refuels exactly this cycle (RHP p.20, 91).</span></div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--a-accent)">⚠</span><span>Family structure: the brother's listed twin (Laser Power &amp; Infra) operates the same business, with ~₹1,650 Cr of its debt personally guaranteed by Lumino's MD, and a promoter-group firm supplies ~13% of raw materials (RHP p.39–44).</span></div>
+
+    <div class="sec-label">The one thing this rests on</div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--color-text-secondary)">→</span><span>Whether reported profit starts converting into operating cash — i.e., whether discom receivables and the working-capital cycle stabilise as the ₹3,150 Cr order book turns into revenue.</span></div>
+
+    <div class="sec-label">What has to go right for the asking price to make sense</div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--color-text-secondary)">→</span><span>EBITDA margin held above ~11% while revenue compounds in the high teens, with CFO ÷ PAT lifting durably toward 1.0x — and the ₹337 Cr repayment actually shrinking, not merely rotating, working-capital borrowings.</span></div>
+
+    <div class="sec-label">Note for a listing-day-only intent</div>
+    <div class="bullet-row"><span class="bicon" style="color:var(--color-text-secondary)">→</span><span>This report measures business quality and offer pricing; neither reliably determines listing-day movement, and no listing-price estimate is offered anywhere in it. Purely factual mechanics that may matter: day-one tradable float is ~₹493 Cr at cap (anchor shares stay locked till ~1 Oct and ~30 Nov 2026), the anchor book is ~93% long-horizon domestic money, and the grey-market figure in the Snapshot tab is unofficial sentiment that forms no part of this assessment.</span></div>
+
+    <div style="margin-top:16px;font-size:11px;color:var(--color-text-secondary);font-style:italic">
+      This is a VIEW based on the offer document and public data. Not an apply/avoid call, no view on listing price, no allotment strategy. The decision is always yours.
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px">
+    <div class="card green">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--g-text);margin-bottom:8px">Opportunities</div>
+      <div class="bullet-row" style="border-color:var(--g-border)"><span class="bicon" style="color:var(--g-accent)">+</span><span style="color:var(--g-text);font-size:12px">₹9.15 lakh Cr transmission capex to 2032 plus the ₹3.04 lakh Cr RDSS distribution pipeline sit exactly on Lumino's product-and-EPC lane</span></div>
+      <div class="bullet-row" style="border-color:var(--g-border)"><span class="bicon" style="color:var(--g-accent)">+</span><span style="color:var(--g-text);font-size:12px">Brownfield capacity expansion to 41,980 MT (+27%) funded within the issue for just ₹15 Cr — high-return, low-risk growth capex</span></div>
+      <div class="bullet-row" style="border-color:var(--g-border);border-bottom:none"><span class="bicon" style="color:var(--g-accent)">+</span><span style="color:var(--g-text);font-size:12px">Post-issue deleveraging of ₹337 Cr frees roughly ₹28–30 Cr of annual interest and restores working-capital headroom for order-book execution</span></div>
+    </div>
+    <div class="card red">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--r-text);margin-bottom:8px">Risks</div>
+      <div class="bullet-row" style="border-color:var(--r-border)"><span class="bicon" style="color:var(--r-accent)">−</span><span style="color:var(--r-text);font-size:12px">Discom payment cycles: 160 receivable days can stretch further in any tight state-fiscal year, forcing fresh borrowing all over again</span></div>
+      <div class="bullet-row" style="border-color:var(--r-border)"><span class="bicon" style="color:var(--r-accent)">−</span><span style="color:var(--r-text);font-size:12px">Permanent conflict channels: guarantees to sibling competitor Laser Power and raw-material sourcing via promoter-group P.S. Enterprise</span></div>
+      <div class="bullet-row" style="border-color:var(--r-border);border-bottom:none"><span class="bicon" style="color:var(--r-accent)">−</span><span style="color:var(--r-text);font-size:12px">~52% of post-issue equity unlocks in a single cliff around 1 Mar 2027 — a standing supply overhang for anyone still holding then</span></div>
+    </div>
+  </div>
+
+  <div class="score-box">
+    Summary card — Business <strong>MODERATE</strong> · Financials <strong>ADEQUATE</strong> · Pricing <strong>LEAVES ROOM (vs peers)</strong> · Offer <strong>BALANCED</strong> · Governance <strong>ACCEPTABLE</strong> · Red flags <strong>SOME CONCERNS</strong>
+  </div>
+
+</div>
+
+<!-- GLOSSARY -->
+<details style="margin-top:20px;padding:0 4px">
+  <summary>Definitions — tap to expand</summary>
+  <p><strong>RHP</strong> — Red Herring Prospectus. The offer document filed with SEBI. Everything the company is legally required to tell you sits in it, including the parts it would rather you skipped.</p>
+  <p><strong>Fresh issue vs OFS</strong> — Fresh issue money goes into the company to fund the business. Offer-for-sale money goes to existing shareholders selling out. A high OFS share means the raise is an exit, not a funding round.</p>
+  <p><strong>WACA</strong> — Weighted Average Cost of Acquisition. What promoters and selling shareholders actually paid for their shares. The gap between WACA and the offer price is the gap between their cost and yours.</p>
+  <p><strong>Objects of the Offer</strong> — The stated uses for fresh-issue money. Specific capex and named debt repayment are checkable. Large "general corporate purposes" is not.</p>
+  <p><strong>Anchor investors</strong> — Institutions allotted shares a day before the issue opens, with staggered lock-ins. Long-only funds signal a different kind of interest than short-horizon money.</p>
+  <p><strong>Lock-in expiry</strong> — Dates when previously restricted shares become sellable. Concentrated expiries create supply.</p>
+  <p><strong>QIB route</strong> — A filing route for companies that do not meet the profitability eligibility test, requiring a much larger institutional allocation. Its presence tells you something about the track record. Lumino filed under the normal profitability route.</p>
+  <p><strong>CFO ÷ PAT</strong> — Cash from operations against reported profit. Persistently below 1 means the profit is not turning into cash.</p>
+  <p><strong>Contingent liabilities</strong> — Obligations that become real only if something happens. Large ones relative to net worth deserve attention.</p>
+  <p><strong>GMP</strong> — Grey market premium. An unofficial, unregulated price quoted before listing. It is sentiment, it is manipulable, and it says nothing about the business.</p>
+</details>
+
+<div class="disc">
+  This is a screening and education tool built on the offer document and public filings. Data sourced from the RHP dated 20 August 2026 (with section and page citations throughout), SEBI, NSE/BSE anchor filings, Screener.in, Value Research, Chittorgarh, and the business press, as dated per item. This is NOT investment advice, an apply/avoid recommendation, or SEBI-registered financial research. IPOs carry higher uncertainty than listed equities: the public track record is short, restated financials are prepared for the offer, allotment is not guaranteed, and listing price is not predictable by any method. AI can make errors — verify every number against the RHP and the exchange filings before acting. Past performance does not guarantee future results. Consult a SEBI-registered investment adviser before investing.
+</div>
+
+</div>
+
+<script>
+function show(n){
+  var panels=document.querySelectorAll('.panel');
+  var tabs=document.querySelectorAll('.tab-btn');
+  for(var i=0;i<panels.length;i++){
+    panels[i].className='panel'+(i===n?' on':'');
+    tabs[i].className='tab-btn'+(i===n?' active':'');
+  }
+}
+</script>
+
+</body>
+</html>
